@@ -1,0 +1,123 @@
+:root {
+    --my-select-border: #ccc;
+    --my-select-value-height: 48px;
+    --my-select-active: red;
+    --my-select-hover: #eee;
+}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    max-width: 500px;
+    width: 100%;
+}
+
+.my-select {
+    width: 100%;
+    position: relative;
+    z-index: 100;
+
+    &__control {
+        border: 1px solid var(--my-select-border);
+        height: var(--my-select-value-height);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+
+    &__backdrop {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        display: none;
+    }
+
+    &__dropdown {
+        position: absolute;
+        max-height: calc(var(--my-select-value-height) * 5);
+        overflow-y: auto;
+        width: 100%;
+        display: none;
+        border: 1px solid var(--my-select-border);
+        
+        &::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
+
+        &::-webkit-scrollbar-corner {
+            background-color: transparent;
+            width: 0;
+            height: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-clip: content-box;
+            background-color: #a0a4a8;
+            border: 2px solid red;
+            border-radius: 0px;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__item {
+        height: var(--my-select-value-height);
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        transition: 0.3s;
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--my-select-border);
+        }
+
+        &:hover {
+            background-color: var(--my-select-hover);
+            cursor: pointer;
+        }
+
+        &--active {
+            background-color: var(--my-select-active);;
+        }
+    }
+
+    &--open &__control {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-color: transparent;
+    }
+
+    &--open &__dropdown {
+        display: block;
+    }
+    &--open &__backdrop {
+        display: block;
+    }
+}

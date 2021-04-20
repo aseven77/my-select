@@ -1,1 +1,1 @@
-# my-select
+# my-select - Плагин
